@@ -47,82 +47,17 @@ BoxDecoration nMbtn = BoxDecoration(
       )
     ]);
 
-class CreditCard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-      decoration: nMbox,
-      child: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text('VISA',
-                  style: TextStyle(
-                      color: fCD, fontSize: 18, fontWeight: FontWeight.w700)),
-              Icon(
-                Icons.more_horiz,
-                color: fCD,
-              ),
-            ],
-          ),
-          SizedBox(height: 25),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text('* * * *',
-                  style: TextStyle(
-                      color: fCD, fontSize: 18, fontWeight: FontWeight.w700)),
-              Text('* * * *',
-                  style: TextStyle(
-                      color: fCD, fontSize: 18, fontWeight: FontWeight.w700)),
-              Text('* * * *',
-                  style: TextStyle(
-                      color: fCD, fontSize: 18, fontWeight: FontWeight.w700)),
-              Text('8014',
-                  style: TextStyle(
-                      color: fCD, fontSize: 18, fontWeight: FontWeight.w700)),
-            ],
-          ),
-          SizedBox(height: 25),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text('Card Holder',
-                      style: TextStyle(
-                          color: fCL,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700)),
-                  Text('Lindsey Johnson',
-                      style: TextStyle(
-                          color: fCD,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700)),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text('Expires',
-                      style: TextStyle(
-                          color: fCL,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700)),
-                  Text('08 / 21',
-                      style: TextStyle(
-                          color: fCD,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700)),
-                ],
-              ),
-            ],
-          )
-        ],
+Widget creditCard(bool down, int index) {
+  return Container(
+    width: 55,
+    height: 55,
+    decoration: down ? nMboxInvert : nMbox,
+    child: FlatButton(
+      onPressed: () {},
+      child: Text(
+        index.toString(),
+        style: TextStyle(color: down ? fCD : fCL),
       ),
-    );
-  }
+    ),
+  );
 }

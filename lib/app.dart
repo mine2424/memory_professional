@@ -5,7 +5,7 @@ import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:getwidget/types/gf_loader_type.dart';
 import 'package:memory_professional/use_case/account/account_notifier.dart';
 import 'package:memory_professional/use_case/account/account_state.dart';
-import 'package:memory_professional/view/game_page/game_board.dart';
+import 'package:memory_professional/view/game_page/game_board_page.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
@@ -40,7 +40,7 @@ class _RootPageState extends State<RootPage> {
   void initState() {
     _pushNotificationConfigure();
     super.initState();
-    _afterBuild();
+    WidgetsBinding.instance.addPostFrameCallback(_afterBuild);
   }
 
   @override
@@ -52,10 +52,12 @@ class _RootPageState extends State<RootPage> {
     );
   }
 
-  Future<void> _afterBuild() async {
+  Future<void> _afterBuild(Duration duration) async {
     // TODO(mine2424): ifでアップデートがあったら即更新させるようにする
     // if()
-    return _showMainPage();
+    await Future<void>.delayed(const Duration(seconds: 1));
+
+    _showMainPage();
   }
 
   void _pushNotificationConfigure() {
@@ -93,7 +95,7 @@ class _RootPageState extends State<RootPage> {
     _firebaseMessaging.subscribeToTopic('all');
   }
 
-  void _showMainPage() => Navigator.of(context, rootNavigator: true)
+  void _showMainPage() => Navigator.of(context)
           .pushReplacement<MaterialPageRoute, void>(MaterialPageRoute(
         builder: (_) => GameBoardPage(),
       ));
