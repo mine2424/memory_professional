@@ -97,6 +97,6 @@ class _RootPageState extends State<RootPage> {
 
   void _showMainPage() => Navigator.of(context)
           .pushReplacement<MaterialPageRoute, void>(MaterialPageRoute(
-        builder: (_) => GameBoardPage(),
+        builder: (_) => GameBoardPage.wrapped(),
       ));
 }

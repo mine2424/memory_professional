@@ -14,9 +14,12 @@ class _$GameBoradStateTearOff {
   const _$GameBoradStateTearOff();
 
 // ignore: unused_element
-  _GameBoradState call({int pressedIndex = 0}) {
+  _GameBoradState call(
+      {int answerIndex = 0, List<bool> questionList, List<int> answerList}) {
     return _GameBoradState(
-      pressedIndex: pressedIndex,
+      answerIndex: answerIndex,
+      questionList: questionList,
+      answerList: answerList,
     );
   }
 }
@@ -27,7 +30,9 @@ const $GameBoradState = _$GameBoradStateTearOff();
 
 /// @nodoc
 mixin _$GameBoradState {
-  int get pressedIndex;
+  int get answerIndex;
+  List<bool> get questionList;
+  List<int> get answerList;
 
   $GameBoradStateCopyWith<GameBoradState> get copyWith;
 }
@@ -37,7 +42,7 @@ abstract class $GameBoradStateCopyWith<$Res> {
   factory $GameBoradStateCopyWith(
           GameBoradState value, $Res Function(GameBoradState) then) =
       _$GameBoradStateCopyWithImpl<$Res>;
-  $Res call({int pressedIndex});
+  $Res call({int answerIndex, List<bool> questionList, List<int> answerList});
 }
 
 /// @nodoc
@@ -51,11 +56,18 @@ class _$GameBoradStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object pressedIndex = freezed,
+    Object answerIndex = freezed,
+    Object questionList = freezed,
+    Object answerList = freezed,
   }) {
     return _then(_value.copyWith(
-      pressedIndex:
-          pressedIndex == freezed ? _value.pressedIndex : pressedIndex as int,
+      answerIndex:
+          answerIndex == freezed ? _value.answerIndex : answerIndex as int,
+      questionList: questionList == freezed
+          ? _value.questionList
+          : questionList as List<bool>,
+      answerList:
+          answerList == freezed ? _value.answerList : answerList as List<int>,
     ));
   }
 }
@@ -67,7 +79,7 @@ abstract class _$GameBoradStateCopyWith<$Res>
           _GameBoradState value, $Res Function(_GameBoradState) then) =
       __$GameBoradStateCopyWithImpl<$Res>;
   @override
-  $Res call({int pressedIndex});
+  $Res call({int answerIndex, List<bool> questionList, List<int> answerList});
 }
 
 /// @nodoc
@@ -83,41 +95,62 @@ class __$GameBoradStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object pressedIndex = freezed,
+    Object answerIndex = freezed,
+    Object questionList = freezed,
+    Object answerList = freezed,
   }) {
     return _then(_GameBoradState(
-      pressedIndex:
-          pressedIndex == freezed ? _value.pressedIndex : pressedIndex as int,
+      answerIndex:
+          answerIndex == freezed ? _value.answerIndex : answerIndex as int,
+      questionList: questionList == freezed
+          ? _value.questionList
+          : questionList as List<bool>,
+      answerList:
+          answerList == freezed ? _value.answerList : answerList as List<int>,
     ));
   }
 }
 
 /// @nodoc
 class _$_GameBoradState implements _GameBoradState {
-  const _$_GameBoradState({this.pressedIndex = 0})
-      : assert(pressedIndex != null);
+  const _$_GameBoradState(
+      {this.answerIndex = 0, this.questionList, this.answerList})
+      : assert(answerIndex != null);
 
   @JsonKey(defaultValue: 0)
   @override
-  final int pressedIndex;
+  final int answerIndex;
+  @override
+  final List<bool> questionList;
+  @override
+  final List<int> answerList;
 
   @override
   String toString() {
-    return 'GameBoradState(pressedIndex: $pressedIndex)';
+    return 'GameBoradState(answerIndex: $answerIndex, questionList: $questionList, answerList: $answerList)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _GameBoradState &&
-            (identical(other.pressedIndex, pressedIndex) ||
+            (identical(other.answerIndex, answerIndex) ||
                 const DeepCollectionEquality()
-                    .equals(other.pressedIndex, pressedIndex)));
+                    .equals(other.answerIndex, answerIndex)) &&
+            (identical(other.questionList, questionList) ||
+                const DeepCollectionEquality()
+                    .equals(other.questionList, questionList)) &&
+            (identical(other.answerList, answerList) ||
+                const DeepCollectionEquality()
+                    .equals(other.answerList, answerList)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(pressedIndex);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(answerIndex) ^
+      const DeepCollectionEquality().hash(questionList) ^
+      const DeepCollectionEquality().hash(answerList);
 
   @override
   _$GameBoradStateCopyWith<_GameBoradState> get copyWith =>
@@ -125,10 +158,17 @@ class _$_GameBoradState implements _GameBoradState {
 }
 
 abstract class _GameBoradState implements GameBoradState {
-  const factory _GameBoradState({int pressedIndex}) = _$_GameBoradState;
+  const factory _GameBoradState(
+      {int answerIndex,
+      List<bool> questionList,
+      List<int> answerList}) = _$_GameBoradState;
 
   @override
-  int get pressedIndex;
+  int get answerIndex;
+  @override
+  List<bool> get questionList;
+  @override
+  List<int> get answerList;
   @override
   _$GameBoradStateCopyWith<_GameBoradState> get copyWith;
 }
