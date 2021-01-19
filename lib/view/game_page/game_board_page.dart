@@ -38,18 +38,12 @@ class GameBoardPage extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(24),
-                  child: blockCard(state.questionList[index], index,notifier),
+                  child: blockCard(state.questionList[index], index, notifier),
                 );
               },
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          notifier.generateQuestionList();
-        },
-        child: const Icon(Icons.add),
       ),
     );
   }

@@ -9,6 +9,7 @@ part 'game_board_notifier.freezed.dart';
 abstract class GameBoradState with _$GameBoradState {
   const factory GameBoradState({
     @Default(0) int answerIndex,
+    @Default(0) int questionCount,
     List<bool> questionList,
     List<int> answerList,
   }) = _GameBoradState;
@@ -22,6 +23,7 @@ class GameBoradNotifier extends StateNotifier<GameBoradState>
 
   List<bool> questionList = [];
   List<int> tmpIndexList = [];
+  int judgeCount = 0;
 
   @override
   void initState() {
@@ -42,32 +44,34 @@ class GameBoradNotifier extends StateNotifier<GameBoradState>
   void comfirmYourAnswer(int index) {
     //現在のanswer数と回答者のanswer数が一致したら答え合わせ
     if (tmpIndexList.length == state.answerList.length) {
-      int count = 0;
       // 答えを確かめるfor
       for (var i = 0; i < state.answerList.length; i++) {
         // tmpとanswerが全部一致したらclear
         if (state.answerList[i] == tmpIndexList[i]) {
-          count++;
-          print('now count is $count');
+          judgeCount++;
+          print('now count is $judgeCount');
         } else {
           //TODO　終了のダイアログ
           print('miss');
         }
       }
-      //全部正解したらクリア！＝ カウントが一致したら
-      if (count == state.answerList.length) {
+      //全部正解したらクリア ＝ カウントが一致したら
+      if (judgeCount == state.answerList.length) {
         print('clear !');
         finishInterval();
-        generateQuestionList();
       }
+      // 全回答数が現在の回答数より下回っていたら
     } else if (tmpIndexList.length < state.answerList.length) {
       tmpIndexList.add(index);
+      print('tmpIndexList is $tmpIndexList');
+      generateQuestionList();
     } else {
-      print('end');
+      print('end for over answer');
       return;
     }
   }
 
+  //TODO 最初の段階でaddAnswerListに数字が入っているのを考慮(一個ずれてる)
   void generateQuestionList() {
     questionList = [];
     final questionNum = Random().nextInt(8);
@@ -82,6 +86,7 @@ class GameBoradNotifier extends StateNotifier<GameBoradState>
       }
     }
     state = state.copyWith(questionList: questionList);
+    print('question count is ${state.questionCount}');
   }
 
   void addAnswerList(int index) {
@@ -92,5 +97,6 @@ class GameBoradNotifier extends StateNotifier<GameBoradState>
       }
     }
     state = state.copyWith(answerList: addAnswerList);
+    print('addAnswerList is ${state.answerList}');
   }
 }
